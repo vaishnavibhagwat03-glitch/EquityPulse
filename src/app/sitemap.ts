@@ -3,7 +3,7 @@ import { SITE_URL } from '@/lib/site';
 
 /** The app's pages plus the headline index constituents' detail pages. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ['', '/screener', '/watchlist'].map(path => ({
+  const pages = ['', '/screener', '/watchlist', '/heatmap'].map(path => ({
     url: `${SITE_URL}${path}`,
     changeFrequency: 'daily' as const,
   }));

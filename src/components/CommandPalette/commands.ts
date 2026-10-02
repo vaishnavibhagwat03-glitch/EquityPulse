@@ -48,6 +48,14 @@ export const COMMANDS: readonly Command[] = [
     run: ({ router }) => router.push('/watchlist'),
   },
   {
+    id: 'nav-heatmap',
+    label: 'Go to Heatmap',
+    group: 'Navigate',
+    shortcut: ['G', 'H'],
+    keywords: 'sectors treemap map',
+    run: ({ router }) => router.push('/heatmap'),
+  },
+  {
     id: 'toggle-filters',
     label: 'Toggle filter panel',
     group: 'Screener',

@@ -18,6 +18,7 @@ const LINKS = [
   { href: '/', label: 'Markets', match: (p: string) => p === '/' },
   { href: '/screener', label: 'Screener', match: (p: string) => p.startsWith('/screener') },
   { href: '/watchlist', label: 'Watchlist', match: (p: string) => p.startsWith('/watchlist') },
+  { href: '/heatmap', label: 'Heatmap', match: (p: string) => p.startsWith('/heatmap') },
 ] as const;
 
 export function TopNav() {

@@ -31,6 +31,7 @@ export function GlobalOverlays() {
     'g m': () => router.push('/'),
     'g s': () => router.push('/screener'),
     'g w': () => router.push('/watchlist'),
+    'g h': () => router.push('/heatmap'),
   });
 
   return (

@@ -4,6 +4,8 @@ Real-time stock intelligence for 5,247 simulated NSE/BSE securities: a screener 
 
 > **All market data is simulated.** Prices, fundamentals and indices are generated deterministically for each trading day and move under a live price simulator. Nothing here is investment advice.
 
+**Live demo:** _add the Vercel URL here after deploying_
+
 ## Quick start
 
 Requires Node.js ≥ 20.9.
@@ -34,6 +36,9 @@ npm start              # worker feed; or `npm run start:all` with the ws server
 | **Screener** (`/screener`)     | 5,247 securities, 53 filters in four categories (range, multi-select, select, boolean, field relations), per-category and root AND/OR, a nested custom expression builder with NOT, 6 preset screens, saved screens, removable filter chips, live "showing X of Y", search, sortable/pinnable/resizable/hideable columns, keyboard navigation, live price flashes, a context panel. |
 | **Stock detail** (`/[symbol]`) | Server-rendered header and metadata, live price, candlestick chart (1D/1W/1M/3M/1Y/5Y) with SMA 20/50/200, EMA 12/26, Bollinger 20/2, RSI 14 pane and volume profile; zoom, pan, crosshair OHLCV readout, reset; fundamentals in tabs (overview, financials, shareholding, technicals); peers.                                                                                      |
 | **Watchlist** (`/watchlist`)   | Add, remove, live prices and changes, open detail; persisted in the browser.                                                                                                                                                                                                                                                                                                        |
+| **Heatmap** (`/heatmap`)       | Largest companies per sector as tiles sized by market cap and coloured by live day change; each tile opens the stock. `G H` or the command palette.                                                                                                                                                                                                                                 |
+| **Export**                     | `CSV` in the screener header downloads the current results (live prices) as CSV.                                                                                                                                                                                                                                                                                                    |
+| **Offline**                    | A service worker (`public/sw.js`, production only) caches the app shell and the last API responses; with the universe already persisted to IndexedDB, the screener opens and filters offline.                                                                                                                                                                                       |
 | **Command palette**            | `Ctrl/⌘ K` or `/`. Search securities, open, add to watchlist (`Ctrl+Enter`), screen similar (`Shift+Enter`), apply presets, navigate, theme, help. `?` lists every shortcut.                                                                                                                                                                                                        |
 | **Live feed**                  | Simulated WebSocket feed with snapshot + sequenced deltas, resync on gaps, heartbeat watchdog, exponential backoff reconnection, offline handling; connection state in the header with details and a manual retry.                                                                                                                                                                  |
 | **Themes**                     | Light (default) and a separately designed dark theme, persisted, applied before first paint.                                                                                                                                                                                                                                                                                        |
@@ -73,14 +78,14 @@ On a host that can run a long-lived Node process, run `npm run feed` next to `np
 
 ## Quality
 
-- 256 tests (Vitest + Testing Library): filter engine (27, incl. every preset and 300 random nested expressions checked against an independent reference), indicators (pinned to Wilder's worked RSI example), data generation, chart data, feed client state machine, a real ws server ↔ client integration, the full live path into the stores, every API route, stores, and component tests of the main workspaces. Coverage ≈ 89% of lines (threshold 70%). Accessibility: axe-core reports 0 WCAG 2.1 A/AA violations on every route (desktop and phone, light and dark); Lighthouse accessibility, best practices and SEO are 100.
+- 260 tests (Vitest + Testing Library): filter engine (27, incl. every preset and 300 random nested expressions checked against an independent reference), indicators (pinned to Wilder's worked RSI example), data generation, chart data, feed client state machine, a real ws server ↔ client integration, the full live path into the stores, every API route, stores, and component tests of the main workspaces. Coverage ≈ 89% of lines (threshold 70%). Accessibility: axe-core reports 0 WCAG 2.1 A/AA violations on every route (desktop and phone, light and dark); Lighthouse accessibility, best practices and SEO are 100.
 - TypeScript strict, ESLint (Next + React Compiler rules) clean, Prettier, Husky + lint-staged on commit.
 - Measured performance: see [PERFORMANCE_REPORT.md](PERFORMANCE_REPORT.md). Design and data flow: see [ARCHITECTURE.md](ARCHITECTURE.md). Build log: [progress/](progress/).
 
 ## Project layout
 
 ```
-src/app/            routes (App Router): (market)/ home, screener, watchlist, [symbol], api/*
+src/app/            routes (App Router): (market)/ home, screener, watchlist, heatmap, [symbol], api/*
 src/components/     Boot, MarketOverview, Screener, DataGrid, FilterPanel, Chart, StockDetail,
                     Watchlist, CommandPalette, Layout, ui
 src/lib/            filterEngine, filters/*, mockDataGenerator, market/*, priceSimulator,

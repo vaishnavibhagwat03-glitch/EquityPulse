@@ -5,6 +5,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react'
 import { cn } from '@/lib/cn';
 import { CATEGORY_ORDER } from '@/lib/filters/definitions';
 import { countActiveFilters } from '@/lib/filters/panel';
+import { downloadCsv, toCsv } from '@/lib/exportCsv';
 import { formatInteger } from '@/lib/format';
 import { useHotkeys } from '@/hooks/useHotkeys';
 import { useIsDesktop, useIsMobile, useIsWide } from '@/hooks/useMediaQuery';
@@ -86,6 +87,11 @@ export function ScreenerWorkspace() {
     [router],
   );
   const onToggleWatch = useCallback((symbol: string) => toggleWatch(symbol), [toggleWatch]);
+  const onExport = useCallback(() => {
+    const rows = Array.from(result.rows, i => stocks[i]!);
+    const date = new Date().toISOString().slice(0, 10);
+    downloadCsv(`equitypulse-screen-${date}.csv`, toCsv(rows, useStockStore.getState().quotes));
+  }, [result.rows, stocks]);
   const onLayoutChange = useCallback(
     (layout: Parameters<React.ComponentProps<typeof DataGrid>['onLayoutChange']>[0]) =>
       setColumns(prev => ({
@@ -229,6 +235,16 @@ export function ScreenerWorkspace() {
                 shortcut="S"
                 containerClassName="w-[min(48vw,280px)]"
               />
+              <Button
+                size="sm"
+                variant="secondary"
+                icon="arrow-down"
+                onClick={onExport}
+                disabled={!result.ready || result.rows.length === 0}
+                title="Download the current results as CSV"
+              >
+                CSV
+              </Button>
               <span className="hidden md:contents">
                 <ColumnPicker />
               </span>

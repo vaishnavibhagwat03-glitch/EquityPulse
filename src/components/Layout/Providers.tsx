@@ -123,9 +123,14 @@ function MarketDataBridge() {
   // needs it) loads once they are on screen. The screener and watchlist are
   // that data, so they only wait for the first paint, not for idle time.
   const pathname = usePathname() ?? '/';
-  const urgent = pathname.startsWith('/screener') || pathname.startsWith('/watchlist');
+  const urgent = ['/screener', '/watchlist', '/heatmap'].some(p => pathname.startsWith(p));
   useStockData(useAfterFirstPaint(urgent));
   useMarketFeed();
   useEffect(() => initPerformanceObservers(), []);
+  useEffect(() => {
+    // Offline app shell (public/sw.js). Production only: it would cache dev bundles.
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator)
+      navigator.serviceWorker.register('/sw.js').catch(() => undefined);
+  }, []);
   return null;
 }

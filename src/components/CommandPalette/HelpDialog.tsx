@@ -17,6 +17,7 @@ const GROUPS = (mod: string) =>
         [['G', 'M'], 'Go to Markets'],
         [['G', 'S'], 'Go to Screener'],
         [['G', 'W'], 'Go to Watchlist'],
+        [['G', 'H'], 'Go to Heatmap'],
         [['Esc'], 'Close overlay'],
       ],
     },
