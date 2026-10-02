@@ -1,23 +1,25 @@
-# Day 15 — Progress report
+# Day 15 — Bonus features, documentation and submission
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** Bonus: heatmap, CSV export, service worker; documentation; submission
+**Date:** 2026-10-02
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Heatmap view (/heatmap) coloured by live day change
+- CSV export of screener results
+- Service worker for offline app shell; grid rows set to 36px
+- README, ARCHITECTURE and progress reports updated; pushed to GitHub
 
-## In progress / next
+## Next
 
-- _
+- Vercel deployment, ERRATA.md, final tag and repository transfer
 
 ## Blockers
 
-- None / _
+- GitHub push was rejected (403) because the PC was signed in to another account; fixed by authenticating as my account
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Building the heatmap, CSV export and service worker; preparing the repository for submission
+- My part: reviewed and tested the output, and made the final decisions

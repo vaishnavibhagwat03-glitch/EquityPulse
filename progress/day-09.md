@@ -1,23 +1,24 @@
-# Day 9 — Progress report
+# Day 9 — WebSocket feed server and worker transport
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 5 Feed protocol, ws server + Web Worker transports
+**Date:** 2026-09-26
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Feed protocol: snapshot + sequenced deltas, geometric Brownian motion price simulator
+- ws feed server (server/feed-server.ts) and an identical Web Worker transport for Vercel
+- Resync when a sequence gap is detected
 
-## In progress / next
+## Next
 
-- _
+- Client connection state machine
 
 ## Blockers
 
-- None / _
+- The feed client treated a missing navigator.onLine (Node >= 21) as offline; fixed
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Designing the protocol and the price simulator; debugging the Node online check
+- My part: reviewed and tested the output, and made the final decisions

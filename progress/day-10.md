@@ -1,23 +1,25 @@
-# Day 10 — Progress report
+# Day 10 — Client feed state machine and live updates
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 5 Client state machine: backoff, watchdog, resync, rAF batching, cell flashes
+**Date:** 2026-09-27
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Exponential backoff reconnection, heartbeat watchdog, offline handling
+- requestAnimationFrame batching of ticks into the store
+- Green/red cell flash animations; connection status with manual retry
 
-## In progress / next
+## Next
 
-- _
+- Watchlist and command palette
 
 ## Blockers
 
-- None / _
+- Reconnect countdown read a clock captured at mount and could show '604s'; now read at render
+- A missing Web Animations API could crash the grid via the price flash; guarded
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Writing the state machine and its lifecycle tests; finding the countdown bug
+- My part: reviewed and tested the output, and made the final decisions

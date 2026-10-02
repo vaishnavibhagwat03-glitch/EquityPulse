@@ -1,23 +1,25 @@
-# Day 13 — Progress report
+# Day 13 — Tests and code quality
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 8 Tests and coverage
+**Date:** 2026-09-30
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Vitest + Testing Library suite: engine, indicators, feed, API routes, stores, workspaces
+- Coverage about 89% of lines (threshold 70%)
+- Lint and typecheck clean
 
-## In progress / next
+## Next
 
-- _
+- Performance measurement and Lighthouse
 
 ## Blockers
 
-- None / _
+- 15 lint errors from effects setting state for client-only values; replaced with useSyncExternalStore / derived state
+- AnimatedNumber and the FPS sampler mixed two clocks; unified and clamped
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Writing test cases and fixing the lint errors
+- My part: reviewed and tested the output, and made the final decisions

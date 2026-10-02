@@ -1,23 +1,24 @@
-# Day 12 — Progress report
+# Day 12 — Market home and boot sequence
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 7 Boot sequence and Market Grid home
+**Date:** 2026-09-29
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Market Grid home: indices, breadth, sector movement, top movers, preset counts
+- Boot sequence (full / return visit / reduced motion) and Market -> Screener transition
+- Responsive layout for phones
 
-## In progress / next
+## Next
 
-- _
+- Testing and coverage
 
 ## Blockers
 
-- None / _
+- Phone widths overflowed in the top bar and stock-page tabs; fixed
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Animation timing for the boot sequence; fixing the phone layout overflow
+- My part: reviewed and tested the output, and made the final decisions

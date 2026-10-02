@@ -1,23 +1,24 @@
-# Day 11 — Progress report
+# Day 11 — Watchlist, command palette and shortcuts
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 6 Watchlist, command palette, shortcuts, persistence
+**Date:** 2026-09-28
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Watchlist with live prices, sorting and keyboard control, persisted in the browser
+- Command palette (Ctrl/Cmd K or /): search, open, add to watchlist, presets, navigation, theme
+- Shortcut help dialog (?)
 
-## In progress / next
+## Next
 
-- _
+- Home page and boot sequence
 
 ## Blockers
 
-- None / _
+- None
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Building the palette's command list and keyboard handling
+- My part: reviewed and tested the output, and made the final decisions

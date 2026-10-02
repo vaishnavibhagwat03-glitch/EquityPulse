@@ -1,23 +1,24 @@
-# Day 2 — Progress report
+# Day 2 — Mock data generator and app shell
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 1 Foundation (cont.)
+**Date:** 2026-09-19
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Deterministic generator for 5,247 simulated NSE/BSE securities (prices, fundamentals, technicals)
+- Layout shell: top navigation, status bar, skip link, theme applied before first paint
+- API routes: /api/stocks, /api/sectors, /api/indices, /api/market, /api/health
 
-## In progress / next
+## Next
 
-- _
+- Virtualised data grid
 
 ## Blockers
 
-- None / _
+- Keeping generated data realistic per sector (P/E, margins, leverage bands)
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Designing the generator's sector bands and writing the API route handlers
+- My part: reviewed and tested the output, and made the final decisions

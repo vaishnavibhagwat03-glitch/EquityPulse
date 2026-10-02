@@ -1,23 +1,24 @@
-# Day 4 — Progress report
+# Day 4 — Grid keyboard navigation and ARIA
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 2 Grid keyboard navigation and ARIA grid semantics
+**Date:** 2026-09-21
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- ARIA grid semantics (role=grid, row/column indices, aria-sort)
+- Arrow keys, Home/End, Page Up/Down, Enter to open, Space to watch
+- Live price cells subscribed per symbol so a tick re-renders only that cell
 
-## In progress / next
+## Next
 
-- _
+- Filter engine
 
 ## Blockers
 
-- None / _
+- Giving TanStack Table all 5,247 rows cost ~100 ms per re-sort and ~90 MB of heap. Changed it to manage columns only (heap 113 MB -> 24 MB)
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Profiling the row-model cost and refactoring the grid to manage columns only
+- My part: reviewed and tested the output, and made the final decisions

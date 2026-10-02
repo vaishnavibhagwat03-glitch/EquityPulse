@@ -1,23 +1,24 @@
-# Day 6 — Progress report
+# Day 6 — Filter panel, presets and saved screens
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 3 Nested AND/OR/NOT builder, presets, saved screens, chips
+**Date:** 2026-09-23
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Compound-component filter panel with per-category and root AND/OR
+- Nested custom expression builder with NOT
+- 6 preset screens, saved screens, removable filter chips, live 'showing X of Y'
 
-## In progress / next
+## Next
 
-- _
+- Stock detail page and charts
 
 ## Blockers
 
-- None / _
+- Escape in numeric filter inputs committed the draft value instead of reverting it; fixed and tested
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Building the compound components and the expression builder; reproducing the Escape bug
+- My part: reviewed and tested the output, and made the final decisions

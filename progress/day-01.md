@@ -1,23 +1,24 @@
-# Day 1 — Progress report
+# Day 1 — Project setup and foundation
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 1 Foundation: Next.js, TypeScript, Tailwind tokens, types, data generator, layout shell
+**Date:** 2026-09-18
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Created the Next.js App Router project with strict TypeScript, ESLint, Prettier, Husky and lint-staged
+- Set up Tailwind 4 design tokens for the light theme and a separately designed dark theme
+- Defined the core domain types (Stock, LiveQuote, Candle, indices, sectors)
 
-## In progress / next
+## Next
 
-- _
+- Mock data generator for the security universe
 
 ## Blockers
 
-- None / _
+- Next.js 16 changed several APIs compared with older docs; read the bundled docs before writing route code
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Scaffolding the project structure and config files; explaining Next.js 16 / Tailwind 4 changes
+- My part: reviewed and tested the output, and made the final decisions

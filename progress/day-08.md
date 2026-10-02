@@ -1,23 +1,24 @@
-# Day 8 — Progress report
+# Day 8 — Technical indicators and fundamentals
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 4 Indicators: SMA, EMA, Bollinger, RSI, volume profile; fundamentals tabs
+**Date:** 2026-09-25
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Self-calculated SMA 20/50/200, EMA 12/26, Bollinger 20/2, RSI 14 pane and volume profile
+- RSI tests pinned to Wilder's worked example
+- Fundamentals tabs (overview, financials, shareholding, technicals) and peers
 
-## In progress / next
+## Next
 
-- _
+- WebSocket feed
 
 ## Blockers
 
-- None / _
+- RSI must use Wilder smoothing, not a simple average, to match published values
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Checking indicator formulas and writing the indicator unit tests
+- My part: reviewed and tested the output, and made the final decisions

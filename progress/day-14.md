@@ -1,23 +1,25 @@
-# Day 14 — Progress report
+# Day 14 — Performance, Lighthouse and accessibility
 
-**Date:** YYYY-MM-DD
-**Hours worked:** _
-**Phase (suggested, edit to match what you did):** 8 Performance measurement, Lighthouse, accessibility fixes
+**Date:** 2026-10-01
+**Hours worked:** 2
 
 ## Completed
 
-- _
+- Measured LCP, CLS, scroll FPS (59 fps presented) and filter timings; wrote PERFORMANCE_REPORT.md
+- Gzipped the universe response (1.85 MB -> 0.69 MB) and deferred it until after first paint
+- Fixed contrast, label and landmark issues: 0 axe-core violations on every route
 
-## In progress / next
+## Next
 
-- _
+- Bonus features and submission
 
 ## Blockers
 
-- None / _
+- Screener layout shift of 0.57 on phones (layout chosen in script); moved to CSS breakpoints
+- Lighthouse mobile performance is still below 90 (heavy data download on throttled phones)
 
 ## AI tool usage
 
-- Tool: _
-- Used for: _
-- What I changed or verified myself: _
+- Tool: Claude (used frequently)
+- Used for: Analysing Lighthouse output and fixing the accessibility findings
+- My part: reviewed and tested the output, and made the final decisions
