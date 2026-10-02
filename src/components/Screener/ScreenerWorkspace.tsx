@@ -6,6 +6,7 @@ import { cn } from '@/lib/cn';
 import { CATEGORY_ORDER } from '@/lib/filters/definitions';
 import { countActiveFilters } from '@/lib/filters/panel';
 import { downloadCsv, toCsv } from '@/lib/exportCsv';
+import { printPdf, toPrintHtml } from '@/lib/exportPdf';
 import { formatInteger } from '@/lib/format';
 import { useHotkeys } from '@/hooks/useHotkeys';
 import { useIsDesktop, useIsMobile, useIsWide } from '@/hooks/useMediaQuery';
@@ -91,6 +92,10 @@ export function ScreenerWorkspace() {
     const rows = Array.from(result.rows, i => stocks[i]!);
     const date = new Date().toISOString().slice(0, 10);
     downloadCsv(`equitypulse-screen-${date}.csv`, toCsv(rows, useStockStore.getState().quotes));
+  }, [result.rows, stocks]);
+  const onExportPdf = useCallback(() => {
+    const rows = Array.from(result.rows, i => stocks[i]!);
+    printPdf(toPrintHtml(rows, useStockStore.getState().quotes, 'EquityPulse screen'));
   }, [result.rows, stocks]);
   const onLayoutChange = useCallback(
     (layout: Parameters<React.ComponentProps<typeof DataGrid>['onLayoutChange']>[0]) =>
@@ -244,6 +249,15 @@ export function ScreenerWorkspace() {
                 title="Download the current results as CSV"
               >
                 CSV
+              </Button>
+              <Button
+                size="sm"
+                variant="secondary"
+                onClick={onExportPdf}
+                disabled={!result.ready || result.rows.length === 0}
+                title="Print the current results or save them as PDF"
+              >
+                PDF
               </Button>
               <span className="hidden md:contents">
                 <ColumnPicker />
