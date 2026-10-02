@@ -43,6 +43,31 @@ npm start              # worker feed; or `npm run start:all` with the ws server
 | **Live feed**                  | Simulated WebSocket feed with snapshot + sequenced deltas, resync on gaps, heartbeat watchdog, exponential backoff reconnection, offline handling; connection state in the header with details and a manual retry.                                                                                                                                                                  |
 | **Themes**                     | Light (default) and a separately designed dark theme, persisted, applied before first paint.                                                                                                                                                                                                                                                                                        |
 
+## Architecture
+
+```
+ Next.js server ── /api/stocks (compact universe, gzip) ──┐      ws feed server (optional)
+   mock data generator, API routes, SSR pages             │              │ ticks
+                                                          ▼              ▼
+ Browser:  TanStack Query (IndexedDB) ─► stockStore ◄── FeedClient ◄── WebSocket / Web Worker
+                                           │               (backoff, resync, rAF batching)
+           filterStore ─► FilterEngine ─► row order ─► DataGrid (TanStack Table + Virtual)
+           uiStore · watchlistStore · feedStore (Zustand slices)
+```
+
+Full diagrams, state flow between TanStack Query and Zustand, and the library decision log: [ARCHITECTURE.md](ARCHITECTURE.md).
+
+## Technology trade-offs
+
+| Choice                                                       | Why                                                                                                                                                                                                                                                                           | Trade-off                                                                                                                                           |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Next.js 16 / React 19** (spec names Next.js 14 / React 18) | Current stable releases at build time: Turbopack builds, React Compiler lint rules, `useSyncExternalStore`-friendly concurrent rendering, and the Turbopack bundle analyzer. Everything the spec asks for (App Router, server components, route handlers) works the same way. | Version differs from the spec; downgrading would mean replacing APIs used throughout (async request APIs, React 19 types) for no user-visible gain. |
+| TanStack Table + Virtual                                     | Headless: the grid owns markup, so ARIA grid semantics and fixed 36px rows are exact. Virtual renders ~30 rows of 5,247.                                                                                                                                                      | More code than a packaged grid (AG Grid); TanStack manages columns only, rows are rendered from the filter engine's order.                          |
+| Custom columnar filter engine                                | Typed arrays + bitsets: 5 conditions on 5,247 rows at p95 2.2 ms (target < 200 ms), nested AND/OR/NOT.                                                                                                                                                                        | Own code to maintain instead of filtering objects with `Array.filter`.                                                                              |
+| Zustand (domain slices) + TanStack Query                     | Query owns server state and its IndexedDB persistence; Zustand owns client state with per-slice subscriptions so a tick re-renders one cell.                                                                                                                                  | Two state libraries instead of one.                                                                                                                 |
+| Lightweight Charts                                           | 155 KB, canvas, built for financial series; loaded only on the stock page.                                                                                                                                                                                                    | Indicators are calculated by us, not by the library.                                                                                                |
+| Web Worker feed fallback                                     | Vercel cannot host a long-lived WebSocket server; the same protocol runs in a worker, so the deployed app still streams.                                                                                                                                                      | Two transports to keep in step (both covered by tests).                                                                                             |
+
 ## Scripts
 
 | Command                                    |                                                                                                                           |
