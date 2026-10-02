@@ -1,0 +1,100 @@
+{
+  "measuredAt": "2026-10-02T10:24:05.577Z",
+  "environment": {
+    "node": "v24.18.0",
+    "platform": "win32 x64",
+    "cpu": "Intel(R) Core(TM) i3-10110U CPU @ 2.10GHz",
+    "cores": 4
+  },
+  "universe": {
+    "securities": 5247,
+    "generationMs": 1514
+  },
+  "results": [
+    {
+      "name": "filter · 5 conditions · cold",
+      "runs": 30,
+      "medianMs": 0.786,
+      "p95Ms": 2.175,
+      "maxMs": 2.567,
+      "budgetMs": 200
+    },
+    {
+      "name": "filter · 5 conditions · one changed",
+      "runs": 60,
+      "medianMs": 0.16,
+      "p95Ms": 0.248,
+      "maxMs": 0.297,
+      "budgetMs": 200
+    },
+    {
+      "name": "filter + sort · 5 conditions",
+      "runs": 30,
+      "medianMs": 0.107,
+      "p95Ms": 0.477,
+      "maxMs": 0.493,
+      "budgetMs": 200
+    },
+    {
+      "name": "filter · 20 nested conditions · cold",
+      "runs": 30,
+      "medianMs": 1.711,
+      "p95Ms": 2.594,
+      "maxMs": 2.728,
+      "budgetMs": 200
+    },
+    {
+      "name": "sort · cold permutation",
+      "runs": 30,
+      "medianMs": 1.692,
+      "p95Ms": 2.092,
+      "maxMs": 2.158,
+      "budgetMs": 150
+    },
+    {
+      "name": "sort · by name · cold",
+      "runs": 15,
+      "medianMs": 10.366,
+      "p95Ms": 12.704,
+      "maxMs": 12.704,
+      "budgetMs": 150
+    },
+    {
+      "name": "store · apply 500 ticks",
+      "runs": 50,
+      "medianMs": 0.487,
+      "p95Ms": 1.376,
+      "maxMs": 3.032,
+      "budgetMs": 16
+    },
+    {
+      "name": "columns · fold 500 live rows",
+      "runs": 20,
+      "medianMs": 4.346,
+      "p95Ms": 9.826,
+      "maxMs": 9.826
+    },
+    {
+      "name": "universe · parse + decode 5,247 rows",
+      "runs": 10,
+      "medianMs": 104.962,
+      "p95Ms": 157.345,
+      "maxMs": 157.345
+    },
+    {
+      "name": "universe payload · 1.76 MB uncompressed",
+      "runs": 1,
+      "medianMs": 0,
+      "p95Ms": 0,
+      "maxMs": 0
+    },
+    {
+      "name": "search · one keystroke",
+      "runs": 100,
+      "medianMs": 1.485,
+      "p95Ms": 2.936,
+      "maxMs": 6.045,
+      "budgetMs": 16
+    }
+  ]
+}

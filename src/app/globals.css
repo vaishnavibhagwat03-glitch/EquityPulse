@@ -1,0 +1,781 @@
+@import 'tailwindcss';
+
+/* Dark mode is driven by an explicit data-theme attribute (set before paint by
+   the inline theme script), not by the media query, so the user's choice wins. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ----------------------------------------------------------------------------
+   Design tokens
+   Light is the primary theme: warm paper, white surfaces, near-black ink,
+   hairline borders, restrained direction colours. Dark is designed on its own
+   terms — deep warm charcoal, not an inversion — and keeps the same identity.
+---------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --bg: #f7f7f5;
+  --bg-sunken: #f1f1ee;
+  --surface: #ffffff;
+  --surface-hover: #f8f8f6;
+  --surface-active: #f0f0ec;
+  --surface-inverse: #151515;
+
+  --border: #e5e5e0;
+  --border-subtle: #eeeeea;
+  --border-strong: #d3d3cd;
+
+  --text: #151515;
+  --text-2: #3b3b38;
+  --text-muted: #666661;
+  --text-faint: #6d6d67; /* ≥ 4.5:1 on every light surface (WCAG AA) */
+  --text-inverse: #f7f7f5;
+
+  --accent: #2c56c9;
+  --accent-hover: #2349b0;
+  --accent-soft: rgba(44, 86, 201, 0.08);
+  --accent-ring: rgba(44, 86, 201, 0.32);
+
+  /* Direction text is a step deeper than the brief's #16803C / #C73737 so it
+     clears 4.5:1 on every surface it lands on — including the selected row and
+     the tick-flash tint. Candle bodies keep the brighter fills below. */
+  --positive: #106d33;
+  --positive-soft: rgba(16, 109, 51, 0.08);
+  --positive-flash: rgba(16, 109, 51, 0.14);
+  --negative: #b02d2d;
+  --negative-soft: rgba(176, 45, 45, 0.07);
+  --negative-flash: rgba(176, 45, 45, 0.12);
+  --candle-up: #16803c;
+  --candle-down: #c73737;
+  --warning: #9a5b00;
+  --warning-soft: rgba(154, 91, 0, 0.1);
+
+  /* Chart series — validated with the dataviz palette checker (adjacent CVD
+     ΔE ≥ 9.1, normal-vision ≥ 19.6). One fixed hue per indicator:
+     1 SMA 20 · 2 SMA 50 · 3 SMA 200 · 4 EMA 12 · 5 EMA 26 · 6 Bollinger.
+     Slots 3–5 sit under 3:1 on white, so the chart legend always prints
+     each series' value beside its swatch (the required relief channel). */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #4a3aa7;
+  --series-band: rgba(74, 58, 167, 0.06);
+  --chart-grid: #efefeb;
+
+  --ep-shadow-sm: 0 1px 2px rgba(21, 21, 21, 0.04);
+  --ep-shadow-md: 0 1px 2px rgba(21, 21, 21, 0.04), 0 4px 12px -2px rgba(21, 21, 21, 0.06);
+  --ep-shadow-lg: 0 2px 4px rgba(21, 21, 21, 0.04), 0 16px 40px -8px rgba(21, 21, 21, 0.16);
+
+  --ep-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ep-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ep-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --nav-height: 48px;
+  --status-height: 26px;
+  --row-height: 34px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0e0e0d;
+  --bg-sunken: #0a0a09;
+  --surface: #151514;
+  --surface-hover: #1a1a18;
+  --surface-active: #20201e;
+  --surface-inverse: #edede8;
+
+  --border: #252523;
+  --border-subtle: #1d1d1b;
+  --border-strong: #34342f;
+
+  --text: #edede8;
+  --text-2: #cfcfc8;
+  --text-muted: #9a9a92;
+  --text-faint: #878780; /* ≥ 4.5:1 on every dark surface (WCAG AA) */
+  --text-inverse: #151515;
+
+  --accent: #8aa6f3;
+  --accent-hover: #a3b9f6;
+  --accent-soft: rgba(138, 166, 243, 0.1);
+  --accent-ring: rgba(138, 166, 243, 0.38);
+
+  --positive: #4cb874;
+  --positive-soft: rgba(76, 184, 116, 0.1);
+  --positive-flash: rgba(76, 184, 116, 0.16);
+  --negative: #f17d76;
+  --negative-soft: rgba(241, 125, 118, 0.1);
+  --negative-flash: rgba(241, 125, 118, 0.16);
+  --candle-up: #4cb874;
+  --candle-down: #ec6a62;
+  --warning: #e0a548;
+  --warning-soft: rgba(224, 165, 72, 0.12);
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #9085e9;
+  --series-band: rgba(144, 133, 233, 0.08);
+  --chart-grid: #1e1e1c;
+
+  --ep-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --ep-shadow-md: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 16px -4px rgba(0, 0, 0, 0.5);
+  --ep-shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.5), 0 20px 48px -12px rgba(0, 0, 0, 0.7);
+}
+
+@theme inline {
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia, 'Times New Roman', serif;
+
+  --color-bg: var(--bg);
+  --color-bg-sunken: var(--bg-sunken);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-active: var(--surface-active);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-line: var(--border);
+  --color-line-subtle: var(--border-subtle);
+  --color-line-strong: var(--border-strong);
+  --color-ink: var(--text);
+  --color-ink-2: var(--text-2);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-ink-inverse: var(--text-inverse);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-positive: var(--positive);
+  --color-positive-soft: var(--positive-soft);
+  --color-negative: var(--negative);
+  --color-negative-soft: var(--negative-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+
+  --text-2xs: 10.5px;
+  --text-2xs--line-height: 14px;
+  --text-xs: 11.5px;
+  --text-xs--line-height: 16px;
+  --text-sm: 12.5px;
+  --text-sm--line-height: 18px;
+  --text-base: 13.5px;
+  --text-base--line-height: 20px;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --shadow-sm: var(--ep-shadow-sm);
+  --shadow-md: var(--ep-shadow-md);
+  --shadow-lg: var(--ep-shadow-lg);
+
+  --ease-out: var(--ep-ease-out);
+  --ease-in-out: var(--ep-ease-in-out);
+  --ease-drawer: var(--ep-ease-drawer);
+}
+
+/* ----------------------------------------------------------------------------
+   Base
+---------------------------------------------------------------------------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: default;
+  }
+
+  input,
+  button,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* Hairline scrollbars that stay out of the data's way. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Utilities
+---------------------------------------------------------------------------- */
+@utility num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings:
+    'tnum',
+    'zero' 0;
+  letter-spacing: -0.01em;
+}
+
+/* Uppercase micro-label: the institutional voice of the interface. */
+@utility label-caps {
+  font-size: 10.5px;
+  line-height: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@utility up {
+  color: var(--positive);
+}
+
+@utility down {
+  color: var(--negative);
+}
+
+@utility hairline {
+  border-color: var(--border);
+}
+
+@utility press {
+  transition: transform 140ms var(--ep-ease-out);
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+}
+
+@utility tap-target {
+  @media (pointer: coarse) {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Motion
+---------------------------------------------------------------------------- */
+@keyframes ep-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ep-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ep-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes ep-shimmer {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+
+@keyframes ep-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.page-enter {
+  animation: ep-rise-in 320ms var(--ep-ease-out) both;
+}
+
+.fade-enter {
+  animation: ep-fade-in 220ms var(--ep-ease-out) both;
+}
+
+.skeleton {
+  background: linear-gradient(
+      100deg,
+      transparent 30%,
+      color-mix(in srgb, var(--surface) 70%, transparent) 50%,
+      transparent 70%
+    )
+    var(--surface-active);
+  background-size: 200% 100%;
+  animation: ep-shimmer 1.6s linear infinite;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+   Boot sequence (components/Boot). Hidden unless the head script picked an
+   active mode, so the page is never covered without JavaScript. The overlay's
+   states are data attributes flipped by one rAF loop; CSS does the motion.
+---------------------------------------------------------------------------- */
+.boot-root {
+  display: none;
+}
+html[data-intro='full'] .boot-root,
+html[data-intro='return'] .boot-root,
+html[data-intro='reduced'] .boot-root,
+html[data-intro='handoff'] .boot-root {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.boot-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+}
+.boot-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.boot-title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  transition: transform 560ms var(--ep-ease-out);
+  white-space: nowrap;
+}
+.boot-root[data-rise] .boot-title {
+  transform: translate(-50%, calc(-50% + var(--title-dy, -180px)));
+}
+.boot-root[data-compress] .boot-title {
+  transform: translate(-50%, calc(-50% - 84px));
+  transition-duration: 420ms;
+}
+.boot-sub {
+  margin-top: 10px;
+  font-size: 10.5px;
+  line-height: 14px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: opacity 240ms var(--ep-ease-out);
+}
+.boot-sub-2 {
+  margin-top: 6px;
+  color: var(--text-faint);
+}
+/* The status line takes over from "Initializing" once anything moves. */
+.boot-root:not([data-beat='frame']) .boot-sub-2,
+.boot-root[data-compress] .boot-sub-1 {
+  opacity: 0;
+}
+
+.boot-frag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-flex;
+  gap: 8px;
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translate3d(var(--sx, -999px), var(--sy, -999px), 0);
+  transition:
+    opacity 220ms var(--ep-ease-out),
+    transform 460ms var(--ep-ease-in-out);
+}
+.boot-meta {
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.boot-frag[data-on] {
+  opacity: 1;
+}
+.boot-root[data-aligned] .boot-frag {
+  transform: translate3d(var(--ax, 0), var(--ay, 0), 0);
+}
+.boot-root[data-compress] .boot-frag {
+  opacity: 0;
+  transition-duration: 180ms;
+}
+.boot-readout[data-resolved][data-dir='1'] .boot-frag-change {
+  color: var(--positive);
+}
+.boot-readout[data-resolved][data-dir='-1'] .boot-frag-change {
+  color: var(--negative);
+}
+
+.boot-headline {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 36px);
+  width: max-content;
+  text-align: center;
+  transform: translate(-50%, calc(-50% + 8px));
+  opacity: 0;
+  transition:
+    opacity 320ms var(--ep-ease-out),
+    transform 420ms var(--ep-ease-out);
+}
+.boot-root[data-reveal] .boot-headline {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+/* The fly-to animation measures and moves an inner box; keep it un-transitioned. */
+.boot-root[data-handoff] .boot-headline,
+.boot-root[data-handoff] .boot-title {
+  transition: none;
+}
+
+.boot-status {
+  position: absolute;
+  left: 50%;
+  bottom: max(28px, 5vh);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: opacity 200ms var(--ep-ease-out);
+}
+.boot-glyph {
+  width: 1em;
+  text-align: center;
+  color: var(--text);
+}
+.boot-root[data-stage='ready'] .boot-glyph {
+  color: var(--positive);
+}
+
+/* Hand-off: the backdrop and the remaining chrome make way for the page. */
+.boot-root[data-handoff] .boot-bg {
+  opacity: 0;
+  transition: opacity var(--handoff-ms, 350ms) var(--ep-ease-out);
+}
+.boot-root[data-handoff] .boot-canvas,
+.boot-root[data-handoff] .boot-status,
+.boot-root[data-handoff] .boot-sub {
+  opacity: 0;
+  transition: opacity 180ms var(--ep-ease-out);
+}
+.boot-root[data-mode='reduced'][data-handoff] {
+  opacity: 0;
+  transition: opacity 220ms linear !important;
+}
+
+/* Boot sequence — return visit. Pure CSS from the first paint, so it never
+   waits for JavaScript: the wordmark's hairlines draw out, the overlay fades,
+   the page settles in. Durations mirror RETURN_SEQUENCE in lib/boot.ts. */
+:root {
+  --boot-return-signal: 300ms;
+  --boot-return-fade-start: 360ms;
+  --boot-return-fade: 300ms;
+}
+html[data-intro='return'] .boot-root {
+  animation: ep-boot-return-out var(--boot-return-fade) var(--ep-ease-out)
+    var(--boot-return-fade-start) both;
+}
+html[data-intro='return'] .boot-status,
+html[data-intro='return'] .boot-sub-2 {
+  display: none;
+}
+.boot-wordmark {
+  position: relative;
+}
+html[data-intro='return'] .boot-wordmark::before,
+html[data-intro='return'] .boot-wordmark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 50vw;
+  height: 1px;
+  background: var(--border-strong);
+  animation: ep-boot-rule var(--boot-return-signal) var(--ep-ease-out) both;
+}
+html[data-intro='return'] .boot-wordmark::before {
+  right: calc(100% + 20px);
+  transform-origin: right center;
+}
+html[data-intro='return'] .boot-wordmark::after {
+  left: calc(100% + 20px);
+  transform-origin: left center;
+}
+html[data-intro='return'] [data-emerge] {
+  animation: ep-emerge 460ms var(--ep-ease-out) both;
+  animation-delay: calc(var(--boot-return-fade-start) + var(--emerge, 0) * 30ms);
+}
+@keyframes ep-boot-return-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes ep-boot-rule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* The page under the overlay: the market grid emerges around the headline. */
+html[data-intro='full'] [data-emerge],
+html[data-intro='reduced'] [data-emerge] {
+  opacity: 0;
+}
+html[data-intro='handoff'] [data-emerge] {
+  animation: ep-emerge 460ms var(--ep-ease-out) both;
+  animation-delay: calc(var(--emerge, 0) * 40ms);
+}
+/* The nav wordmark and the masthead headline appear as their copies land. */
+html[data-intro='handoff'] [data-wordmark-target],
+html[data-intro='handoff'][data-intro-flip~='headline'] [data-hero-headline] {
+  animation: ep-fade-in 120ms linear var(--handoff-land, 240ms) both;
+}
+
+@keyframes ep-emerge {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-intro='handoff'] [data-emerge] {
+    animation: ep-fade-in 200ms linear both !important;
+  }
+  .boot-title,
+  .boot-frag,
+  .boot-headline {
+    transition: none !important;
+  }
+}
+
+/* "Rows multiply": the screener's entrance when it is opened from the market
+   grid. Uses the individual `translate` property so it composes with the
+   window's virtualisation transform. Only applied for the first second. */
+[data-entering] [role='columnheader'] {
+  animation: ep-fade-in 240ms var(--ep-ease-out) both;
+  animation-delay: calc(80ms + var(--col-i, 0) * 22ms);
+}
+[data-entering] [data-grid-body] [role='row'] {
+  animation: ep-row-in 320ms var(--ep-ease-out) both;
+  animation-delay: calc(160ms + var(--row-i, 0) * 12ms);
+}
+@keyframes ep-row-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* View-transition choreography for the Market → Screener hand-off. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--ep-ease-out);
+}
+
+::view-transition-group(market-grid) {
+  animation-duration: 520ms;
+  animation-timing-function: var(--ep-ease-in-out);
+}
+/* The market grid is taller than the screener's grid area: keep both
+   snapshots anchored top-left and cropped to the morphing box. */
+::view-transition-old(market-grid),
+::view-transition-new(market-grid) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+
+::view-transition-new(filter-panel) {
+  animation: ep-filter-slide 420ms var(--ep-ease-out) 120ms both;
+}
+
+@keyframes ep-filter-slide {
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* RSI cell track: a centre hairline plus 30 / 70 ticks, drawn as backgrounds
+   so each grid row carries one element here instead of four. */
+.rsi-track {
+  background:
+    linear-gradient(var(--border-strong), var(--border-strong)) 0 50% / 100% 1px no-repeat,
+    linear-gradient(var(--border-strong), var(--border-strong)) 30% 50% / 1px 6px no-repeat,
+    linear-gradient(var(--border-strong), var(--border-strong)) 70% 50% / 1px 6px no-repeat;
+}
+
+/* ----------------------------------------------------------------------------
+   Dual-thumb range slider: two native inputs share one track. The inputs
+   ignore the pointer; only their thumbs take it, so either thumb can be
+   grabbed wherever they sit.
+---------------------------------------------------------------------------- */
+.ep-range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+.ep-range::-webkit-slider-runnable-track {
+  height: 100%;
+  background: transparent;
+}
+.ep-range::-moz-range-track {
+  background: transparent;
+}
+.ep-range::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: auto;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1.5px solid var(--text);
+  box-shadow: var(--ep-shadow-sm);
+  cursor: grab;
+  transition: transform 120ms var(--ep-ease-out);
+}
+.ep-range::-moz-range-thumb {
+  pointer-events: auto;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1.5px solid var(--text);
+  cursor: grab;
+}
+.ep-range:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+  cursor: grabbing;
+}
+.ep-range:focus-visible {
+  outline: none;
+}
+.ep-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.ep-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

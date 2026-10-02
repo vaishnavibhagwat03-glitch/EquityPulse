@@ -1,0 +1,31 @@
+# dependencies
+node_modules
+/.pnp
+.pnp.*
+
+# next.js
+.next
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# testing & measurement output
+/coverage
+/reports/raw
+/reports/*.log
+*.lcov
+
+# env files — never commit secrets
+.env
+.env*.local
+.env.development
+.env.production
+
+# misc
+.DS_Store
+*.pem
+*.tsbuildinfo
+npm-debug.log*
+.vercel

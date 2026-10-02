@@ -1,0 +1,170 @@
+{
+  "measuredAt": "2026-10-02T14:24:49.282Z",
+  "target": "http://localhost:3000",
+  "build": "next build && next start (production)",
+  "universe": {
+    "status": "ok",
+    "universe": "g4.2026-10-02.5247.tgkgna",
+    "instruments": 5247,
+    "generatedMs": 1410,
+    "uptimeSeconds": 149
+  },
+  "environment": {
+    "browser": "154.0.8037.97 (headless)",
+    "cpu": "Intel(R) Core(TM) i3-10110U CPU @ 2.10GHz",
+    "cores": 4,
+    "memoryGB": 7.8,
+    "platform": "win32 x64",
+    "node": "v24.18.0",
+    "viewport": "1440×900, DPR 1"
+  },
+  "home": {
+    "firstVisit": {
+      "introMode": "full",
+      "introHandoffMs": 2800.7,
+      "introDoneMs": 4118,
+      "vitals": {
+        "TTFB": 31,
+        "FCP": 836,
+        "LCP": 836,
+        "CLS": 0.002,
+        "INP": 16
+      },
+      "navigation": {
+        "ttfbMs": 30.8,
+        "domContentLoadedMs": 115.2,
+        "loadMs": 359.2,
+        "documentKB": 23.1
+      },
+      "longTasks": {
+        "count": 9,
+        "totalMs": 1081,
+        "blockingMs": 631
+      }
+    },
+    "returnVisit": {
+      "introMode": "return",
+      "firstPaintMs": 576,
+      "overlayGoneMs": 1387.9,
+      "sequenceMs": 811.9,
+      "settledMs": 2048.6
+    }
+  },
+  "screener": {
+    "gridReadyMs": 1860,
+    "vitals": {
+      "LCP": 640,
+      "FCP": 640,
+      "TTFB": 12,
+      "CLS": 0.0041,
+      "INP": 80
+    },
+    "universe": {
+      "rows": 5247,
+      "decodeMs": 76.9,
+      "rowsInDom": 49
+    },
+    "filters": [
+      {
+        "preset": "Value Stocks",
+        "engineMs": 0.3,
+        "clickToDomMs": 373.1,
+        "clickToPaintMs": 462.4,
+        "matched": "28 of 5,247 securities"
+      },
+      {
+        "preset": "Growth Momentum",
+        "engineMs": 3,
+        "clickToDomMs": 168.9,
+        "clickToPaintMs": 273.2,
+        "matched": "385 of 5,247 securities"
+      },
+      {
+        "preset": "Large Cap Quality",
+        "engineMs": 2.2,
+        "clickToDomMs": 111.2,
+        "clickToPaintMs": 209.8,
+        "matched": "144 of 5,247 securities"
+      },
+      {
+        "preset": "Technical Breakout",
+        "engineMs": 0.1,
+        "clickToDomMs": 159.6,
+        "clickToPaintMs": 223.5,
+        "matched": "35 of 5,247 securities"
+      }
+    ],
+    "sorts": [
+      {
+        "column": "P/E",
+        "engineMs": 9.1,
+        "clickToDomMs": 171.6,
+        "clickToPaintMs": 285.8
+      },
+      {
+        "column": "ROE",
+        "engineMs": 3.6,
+        "clickToDomMs": 145.2,
+        "clickToPaintMs": 355.9
+      },
+      {
+        "column": "Change",
+        "engineMs": 2.9,
+        "clickToDomMs": 85.2,
+        "clickToPaintMs": 236.6
+      }
+    ],
+    "scroll": {
+      "gesture": "7,200 px down and back at 2,400 px/s (real wheel input)",
+      "presented": {
+        "frames": 353,
+        "jankyFrames": 6,
+        "jankyPercent": 1.7,
+        "framesOnNextVsync": 347,
+        "presentedFps": 56.6,
+        "vsyncMs": 16666
+      },
+      "blankRows": {
+        "mainFramesChecked": 4909,
+        "framesWithGap": 0,
+        "worstGapPx": 0
+      },
+      "mainThread": {
+        "fpsMean": 56.2,
+        "frameMsP50": 16.7,
+        "frameMsP95": 16.8,
+        "longTasks": {
+          "count": 52,
+          "totalMs": 4501,
+          "blockingMs": 1901
+        }
+      }
+    },
+    "streaming": {
+      "seconds": 30,
+      "feed": "SIMULATED MARKET DATA NOT INVESTMENT ADVICE UNIVERSE 5,247 · AS OF 2026-10-02 FEED WORKER · 108 UPD/S · RTT 1 MS PERF",
+      "tickToRenderMs": {
+        "p50": 10.8,
+        "p95": 18.8,
+        "max": 22.2,
+        "samples": 136
+      },
+      "batchApplyMs": {
+        "p50": 0.4,
+        "p95": 0.6,
+        "samples": 120
+      },
+      "longTasks": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0
+      }
+    },
+    "memory": {
+      "jsHeapUsedMB": 23.8,
+      "jsHeapTotalMB": 24.4,
+      "domNodes": 3479,
+      "layoutObjects": 3326
+    }
+  }
+}

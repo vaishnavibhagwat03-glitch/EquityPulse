@@ -1,0 +1,571 @@
+{
+  "measuredAt": "2026-10-02T14:27:00.231Z",
+  "target": "http://localhost:3000",
+  "build": "next build && next start (production)",
+  "environment": {
+    "cpu": "Intel(R) Core(TM) i3-10110U CPU @ 2.10GHz",
+    "cores": 4,
+    "platform": "win32 x64",
+    "node": "v24.18.0"
+  },
+  "results": [
+    {
+      "page": "/",
+      "formFactor": "desktop",
+      "runs": 1,
+      "performanceScores": [
+        86
+      ],
+      "median": {
+        "scores": {
+          "performance": 86,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "fcpMs": 308,
+          "lcpMs": 701,
+          "ttiMs": 1594,
+          "tbtMs": 282,
+          "cls": 0.0019,
+          "speedIndexMs": 1566
+        },
+        "failedAudits": [
+          {
+            "id": "speed-index",
+            "title": "Speed Index",
+            "score": 0.8,
+            "value": "1.6 s"
+          },
+          {
+            "id": "total-blocking-time",
+            "title": "Total Blocking Time",
+            "score": 0.62,
+            "value": "280 ms"
+          },
+          {
+            "id": "max-potential-fid",
+            "title": "Max Potential First Input Delay",
+            "score": 0.66,
+            "value": "200 ms"
+          },
+          {
+            "id": "mainthread-work-breakdown",
+            "title": "Minimize main-thread work",
+            "score": 0,
+            "value": "3.7 s"
+          },
+          {
+            "id": "bootup-time",
+            "title": "Reduce JavaScript execution time",
+            "score": 0,
+            "value": "1.7 s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0,
+            "value": "Est savings of 60 KiB"
+          },
+          {
+            "id": "llms-txt",
+            "title": "llms.txt does not follow recommendations",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "forced-reflow-insight",
+            "title": "Forced reflow",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "score": 0.5,
+            "value": "Est savings of 13 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "score": 0.5,
+            "value": null
+          }
+        ]
+      },
+      "lighthouse": "13.5.0",
+      "throttling": "simulate"
+    },
+    {
+      "page": "/",
+      "formFactor": "mobile",
+      "runs": 1,
+      "performanceScores": [
+        45
+      ],
+      "median": {
+        "scores": {
+          "performance": 45,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "fcpMs": 1425,
+          "lcpMs": 4745,
+          "ttiMs": 10094,
+          "tbtMs": 4537,
+          "cls": 0,
+          "speedIndexMs": 7476
+        },
+        "failedAudits": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.32,
+            "value": "4.7 s"
+          },
+          {
+            "id": "speed-index",
+            "title": "Speed Index",
+            "score": 0.27,
+            "value": "7.5 s"
+          },
+          {
+            "id": "total-blocking-time",
+            "title": "Total Blocking Time",
+            "score": 0,
+            "value": "4,540 ms"
+          },
+          {
+            "id": "max-potential-fid",
+            "title": "Max Potential First Input Delay",
+            "score": 0,
+            "value": "2,110 ms"
+          },
+          {
+            "id": "interactive",
+            "title": "Time to Interactive",
+            "score": 0.26,
+            "value": "10.1 s"
+          },
+          {
+            "id": "mainthread-work-breakdown",
+            "title": "Minimize main-thread work",
+            "score": 0,
+            "value": "15.6 s"
+          },
+          {
+            "id": "bootup-time",
+            "title": "Reduce JavaScript execution time",
+            "score": 0,
+            "value": "7.4 s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0,
+            "value": "Est savings of 59 KiB"
+          },
+          {
+            "id": "llms-txt",
+            "title": "llms.txt does not follow recommendations",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "forced-reflow-insight",
+            "title": "Forced reflow",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "score": 0,
+            "value": "Est savings of 13 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree",
+            "score": 0,
+            "value": null
+          }
+        ]
+      },
+      "lighthouse": "13.5.0",
+      "throttling": "simulate"
+    },
+    {
+      "page": "/screener",
+      "formFactor": "desktop",
+      "runs": 1,
+      "performanceScores": [
+        84
+      ],
+      "median": {
+        "scores": {
+          "performance": 84,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "fcpMs": 354,
+          "lcpMs": 741,
+          "ttiMs": 1559,
+          "tbtMs": 347,
+          "cls": 0.0073,
+          "speedIndexMs": 1149
+        },
+        "failedAudits": [
+          {
+            "id": "total-blocking-time",
+            "title": "Total Blocking Time",
+            "score": 0.5,
+            "value": "350 ms"
+          },
+          {
+            "id": "max-potential-fid",
+            "title": "Max Potential First Input Delay",
+            "score": 0.65,
+            "value": "210 ms"
+          },
+          {
+            "id": "mainthread-work-breakdown",
+            "title": "Minimize main-thread work",
+            "score": 0,
+            "value": "2.9 s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0,
+            "value": "Est savings of 24 KiB"
+          },
+          {
+            "id": "llms-txt",
+            "title": "llms.txt does not follow recommendations",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "forced-reflow-insight",
+            "title": "Forced reflow",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "score": 0.5,
+            "value": "Est savings of 13 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "score": 0.5,
+            "value": null
+          }
+        ]
+      },
+      "lighthouse": "13.5.0",
+      "throttling": "simulate"
+    },
+    {
+      "page": "/screener",
+      "formFactor": "mobile",
+      "runs": 1,
+      "performanceScores": [
+        42
+      ],
+      "median": {
+        "scores": {
+          "performance": 42,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "fcpMs": 948,
+          "lcpMs": 7394,
+          "ttiMs": 7394,
+          "tbtMs": 3697,
+          "cls": 0,
+          "speedIndexMs": 5422
+        },
+        "failedAudits": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.04,
+            "value": "7.4 s"
+          },
+          {
+            "id": "speed-index",
+            "title": "Speed Index",
+            "score": 0.56,
+            "value": "5.4 s"
+          },
+          {
+            "id": "total-blocking-time",
+            "title": "Total Blocking Time",
+            "score": 0.01,
+            "value": "3,700 ms"
+          },
+          {
+            "id": "max-potential-fid",
+            "title": "Max Potential First Input Delay",
+            "score": 0,
+            "value": "1,230 ms"
+          },
+          {
+            "id": "interactive",
+            "title": "Time to Interactive",
+            "score": 0.49,
+            "value": "7.4 s"
+          },
+          {
+            "id": "mainthread-work-breakdown",
+            "title": "Minimize main-thread work",
+            "score": 0,
+            "value": "9.6 s"
+          },
+          {
+            "id": "bootup-time",
+            "title": "Reduce JavaScript execution time",
+            "score": 0,
+            "value": "4.5 s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0,
+            "value": "Est savings of 24 KiB"
+          },
+          {
+            "id": "llms-txt",
+            "title": "llms.txt does not follow recommendations",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "forced-reflow-insight",
+            "title": "Forced reflow",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "lcp-breakdown-insight",
+            "title": "LCP breakdown",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "score": 0,
+            "value": "Est savings of 13 KiB"
+          }
+        ]
+      },
+      "lighthouse": "13.5.0",
+      "throttling": "simulate"
+    },
+    {
+      "page": "/RELIANCE",
+      "formFactor": "desktop",
+      "runs": 1,
+      "performanceScores": [
+        91
+      ],
+      "median": {
+        "scores": {
+          "performance": 91,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "fcpMs": 416,
+          "lcpMs": 1769,
+          "ttiMs": 1770,
+          "tbtMs": 126,
+          "cls": 0.0048,
+          "speedIndexMs": 978
+        },
+        "failedAudits": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.71,
+            "value": "1.8 s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0,
+            "value": "Est savings of 79 KiB"
+          },
+          {
+            "id": "llms-txt",
+            "title": "llms.txt does not follow recommendations",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "bf-cache",
+            "title": "Page prevented back/forward cache restoration",
+            "score": 0,
+            "value": "2 failure reasons"
+          },
+          {
+            "id": "forced-reflow-insight",
+            "title": "Forced reflow",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "lcp-breakdown-insight",
+            "title": "LCP breakdown",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "legacy-javascript-insight",
+            "title": "Legacy JavaScript",
+            "score": 0,
+            "value": "Est savings of 13 KiB"
+          },
+          {
+            "id": "network-dependency-tree-insight",
+            "title": "Network dependency tree",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "render-blocking-insight",
+            "title": "Render-blocking requests",
+            "score": 0,
+            "value": "Est savings of 100 ms"
+          }
+        ]
+      },
+      "lighthouse": "13.5.0",
+      "throttling": "simulate"
+    },
+    {
+      "page": "/RELIANCE",
+      "formFactor": "mobile",
+      "runs": 1,
+      "performanceScores": [
+        43
+      ],
+      "median": {
+        "scores": {
+          "performance": 43,
+          "accessibility": 100,
+          "bestPractices": 100,
+          "seo": 100
+        },
+        "metrics": {
+          "fcpMs": 1401,
+          "lcpMs": 8318,
+          "ttiMs": 8318,
+          "tbtMs": 1927,
+          "cls": 0,
+          "speedIndexMs": 5334
+        },
+        "failedAudits": [
+          {
+            "id": "largest-contentful-paint",
+            "title": "Largest Contentful Paint",
+            "score": 0.02,
+            "value": "8.3 s"
+          },
+          {
+            "id": "speed-index",
+            "title": "Speed Index",
+            "score": 0.57,
+            "value": "5.3 s"
+          },
+          {
+            "id": "total-blocking-time",
+            "title": "Total Blocking Time",
+            "score": 0.08,
+            "value": "1,930 ms"
+          },
+          {
+            "id": "max-potential-fid",
+            "title": "Max Potential First Input Delay",
+            "score": 0.17,
+            "value": "400 ms"
+          },
+          {
+            "id": "interactive",
+            "title": "Time to Interactive",
+            "score": 0.39,
+            "value": "8.3 s"
+          },
+          {
+            "id": "mainthread-work-breakdown",
+            "title": "Minimize main-thread work",
+            "score": 0,
+            "value": "6.6 s"
+          },
+          {
+            "id": "bootup-time",
+            "title": "Reduce JavaScript execution time",
+            "score": 0,
+            "value": "3.5 s"
+          },
+          {
+            "id": "unused-javascript",
+            "title": "Reduce unused JavaScript",
+            "score": 0,
+            "value": "Est savings of 79 KiB"
+          },
+          {
+            "id": "llms-txt",
+            "title": "llms.txt does not follow recommendations",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "bf-cache",
+            "title": "Page prevented back/forward cache restoration",
+            "score": 0,
+            "value": "2 failure reasons"
+          },
+          {
+            "id": "forced-reflow-insight",
+            "title": "Forced reflow",
+            "score": 0,
+            "value": null
+          },
+          {
+            "id": "lcp-breakdown-insight",
+            "title": "LCP breakdown",
+            "score": 0,
+            "value": null
+          }
+        ]
+      },
+      "lighthouse": "13.5.0",
+      "throttling": "simulate"
+    }
+  ]
+}
