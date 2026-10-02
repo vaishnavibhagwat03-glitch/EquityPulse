@@ -94,6 +94,47 @@ In the browser the same decode measured 58.6 ms.
 
 Accessibility was also checked with axe-core (the engine behind Lighthouse's accessibility audit) on all four routes, at desktop and phone widths, in light and dark themes: **0 violations** (WCAG 2.1 A/AA and best-practice rules). Fixed to get there: faint text below 4.5:1 contrast, accessible names that did not contain the visible label (search button, preset cards), the grid's live region and row wrapper inside the grid, a label on the chart surface without a role, a skipped heading level, and the chart library's internal layout table. SEO: added `robots.txt` and a sitemap.
 
+## Bundle analysis (treemap)
+
+Measured with the Turbopack bundle analyzer (`npm run analyze` runs `next experimental-analyze --output`, then `scripts/bundle-report.mjs` groups each page's client JavaScript by package → `reports/bundle.json`). For the interactive treemap, run `npx next experimental-analyze` and open the printed URL.
+
+Client JavaScript per page (all chunks the page loads):
+
+| Page              | Raw    | Compressed | Largest page-specific code                                             |
+| ----------------- | ------ | ---------- | ---------------------------------------------------------------------- |
+| Home `/`          | 788 KB | 304 KB     | MarketOverview 26 KB, Boot 12 KB                                       |
+| Screener          | 887 KB | 333 KB     | TanStack Table 47 KB, FilterPanel 27 KB, Virtual 23 KB, DataGrid 23 KB |
+| Watchlist         | 747 KB | 286 KB     | Watchlist 8 KB                                                         |
+| Heatmap           | 734 KB | 281 KB     | Heatmap < 3 KB                                                         |
+| Stock `/RELIANCE` | 944 KB | 352 KB     | Lightweight Charts 155 KB, StockDetail 19 KB, Chart 18 KB              |
+
+Treemap of the screener's client JavaScript (area ≈ raw size, 887 KB):
+
+```
+┌──────────────────────────────────────────────────────────────┬───────────────────────┐
+│                                                              │ src/lib  62 KB        │
+│                                                              │ (filter engine, feed, │
+│  next  554 KB  (framework runtime + React DOM)               │  format, codec)       │
+│  shared by every page, cached after the first visit          ├───────────┬───────────┤
+│                                                              │ TanStack  │ TanStack  │
+│                                                              │ Table 47  │ Query 35  │
+│                                                              ├───────────┼───────────┤
+│                                                              │ Filter    │ Virtual 23│
+│                                                              │ Panel 27  ├───────────┤
+│                                                              │           │ DataGrid23│
+│                                                              ├───────────┴───────────┤
+│                                                              │ ui 18 · Layout 16 ·   │
+│                                                              │ other 21 · rest       │
+└──────────────────────────────────────────────────────────────┴───────────────────────┘
+```
+
+Findings:
+
+- **The framework is ~62 % of every page** (554 KB raw, 206 KB compressed, shared and cached across routes). App code per page is small.
+- **Lightweight Charts (155 KB) loads only on the stock page**: it is not in the screener, watchlist or heatmap bundles.
+- **TanStack Table and Virtual load only on the screener.**
+- The 0.69 MB simulated universe is data fetched after first paint, not part of the bundle; it is the main cost on throttled mobile (see above).
+
 ## Tests
 
 `npm run test:coverage` on the final code: **256 tests in 20 files, all passing.** Coverage 89.2 % lines, 88.0 % statements, 83.5 % functions, 76.4 % branches (thresholds 70 / 70 / 70 / 60). What the tests cover is listed in [README.md](README.md#quality).
@@ -105,6 +146,7 @@ npm run build && npm start              # terminal 1
 npm run perf:measure                    # terminal 2 → reports/runtime.json
 npm run perf:lighthouse                 # → reports/lighthouse.json (3 runs per page; this report used --runs 1)
 PERF_REPORT=1 npm run test:perf         # → reports/engine-benchmarks.json
+npm run analyze                         # → reports/bundle.json (after npm run build)
 ```
 
 Results vary with the machine. Two `perf:measure` runs on this laptop with the final grid code agreed closely (home LCP 584 vs 560 ms, scroll main-thread fps 53.5 vs 53.3, tick → render p95 17.4 vs 16.2 ms).

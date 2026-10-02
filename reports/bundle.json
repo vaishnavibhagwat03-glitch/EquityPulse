@@ -1,0 +1,282 @@
+{
+  "/": {
+    "totalKB": 787.8,
+    "compressedKB": 304.1,
+    "top": [
+      {
+        "name": "next",
+        "KB": 554.3,
+        "compressedKB": 205.8
+      },
+      {
+        "name": "src/lib",
+        "KB": 62.4,
+        "compressedKB": 25.7
+      },
+      {
+        "name": "@tanstack/query-core",
+        "KB": 35,
+        "compressedKB": 13.4
+      },
+      {
+        "name": "src/components/MarketOverview",
+        "KB": 25.6,
+        "compressedKB": 9.3
+      },
+      {
+        "name": "other",
+        "KB": 20.5,
+        "compressedKB": 9.4
+      },
+      {
+        "name": "src/components/Layout",
+        "KB": 16.3,
+        "compressedKB": 7.3
+      },
+      {
+        "name": "src/components/ui",
+        "KB": 13.8,
+        "compressedKB": 5.9
+      },
+      {
+        "name": "src/components/CommandPalette",
+        "KB": 12.2,
+        "compressedKB": 4.7
+      },
+      {
+        "name": "src/components/Boot",
+        "KB": 11.5,
+        "compressedKB": 4.9
+      },
+      {
+        "name": "web-vitals",
+        "KB": 8.5,
+        "compressedKB": 3.1
+      }
+    ]
+  },
+  "/screener": {
+    "totalKB": 887.3,
+    "compressedKB": 333.4,
+    "top": [
+      {
+        "name": "next",
+        "KB": 554.3,
+        "compressedKB": 205.8
+      },
+      {
+        "name": "src/lib",
+        "KB": 61.9,
+        "compressedKB": 25.5
+      },
+      {
+        "name": "@tanstack/table-core",
+        "KB": 47.4,
+        "compressedKB": 11.7
+      },
+      {
+        "name": "@tanstack/query-core",
+        "KB": 35,
+        "compressedKB": 13.4
+      },
+      {
+        "name": "src/components/FilterPanel",
+        "KB": 26.9,
+        "compressedKB": 9.9
+      },
+      {
+        "name": "@tanstack/virtual-core",
+        "KB": 23.3,
+        "compressedKB": 6.9
+      },
+      {
+        "name": "src/components/DataGrid",
+        "KB": 22.5,
+        "compressedKB": 8.1
+      },
+      {
+        "name": "other",
+        "KB": 20.5,
+        "compressedKB": 9.4
+      },
+      {
+        "name": "src/components/ui",
+        "KB": 18.1,
+        "compressedKB": 7.8
+      },
+      {
+        "name": "src/components/Layout",
+        "KB": 16.3,
+        "compressedKB": 7.3
+      }
+    ]
+  },
+  "/watchlist": {
+    "totalKB": 747.3,
+    "compressedKB": 286.1,
+    "top": [
+      {
+        "name": "next",
+        "KB": 554.3,
+        "compressedKB": 205.8
+      },
+      {
+        "name": "src/lib",
+        "KB": 51.9,
+        "compressedKB": 21.2
+      },
+      {
+        "name": "@tanstack/query-core",
+        "KB": 35,
+        "compressedKB": 13.4
+      },
+      {
+        "name": "other",
+        "KB": 20.5,
+        "compressedKB": 9.4
+      },
+      {
+        "name": "src/components/Layout",
+        "KB": 16.3,
+        "compressedKB": 7.3
+      },
+      {
+        "name": "src/components/ui",
+        "KB": 13.2,
+        "compressedKB": 5.5
+      },
+      {
+        "name": "src/components/CommandPalette",
+        "KB": 12.2,
+        "compressedKB": 4.7
+      },
+      {
+        "name": "web-vitals",
+        "KB": 8.5,
+        "compressedKB": 3.1
+      },
+      {
+        "name": "src/components/Watchlist",
+        "KB": 8.4,
+        "compressedKB": 2.7
+      },
+      {
+        "name": "src/stores",
+        "KB": 6.2,
+        "compressedKB": 2.9
+      }
+    ]
+  },
+  "/heatmap": {
+    "totalKB": 733.6,
+    "compressedKB": 281.4,
+    "top": [
+      {
+        "name": "next",
+        "KB": 554.3,
+        "compressedKB": 205.8
+      },
+      {
+        "name": "src/lib",
+        "KB": 51.3,
+        "compressedKB": 20.8
+      },
+      {
+        "name": "@tanstack/query-core",
+        "KB": 35,
+        "compressedKB": 13.4
+      },
+      {
+        "name": "other",
+        "KB": 20.5,
+        "compressedKB": 9.4
+      },
+      {
+        "name": "src/components/Layout",
+        "KB": 16.3,
+        "compressedKB": 7.3
+      },
+      {
+        "name": "src/components/CommandPalette",
+        "KB": 12.2,
+        "compressedKB": 4.7
+      },
+      {
+        "name": "src/components/ui",
+        "KB": 12.2,
+        "compressedKB": 5
+      },
+      {
+        "name": "web-vitals",
+        "KB": 8.5,
+        "compressedKB": 3.1
+      },
+      {
+        "name": "src/stores",
+        "KB": 6.2,
+        "compressedKB": 2.9
+      },
+      {
+        "name": "@tanstack/react-query",
+        "KB": 2.7,
+        "compressedKB": 1.7
+      }
+    ]
+  },
+  "/[symbol]": {
+    "totalKB": 944.3,
+    "compressedKB": 351.7,
+    "top": [
+      {
+        "name": "next",
+        "KB": 554.3,
+        "compressedKB": 205.8
+      },
+      {
+        "name": "lightweight-charts",
+        "KB": 155.2,
+        "compressedKB": 50.6
+      },
+      {
+        "name": "src/lib",
+        "KB": 56.3,
+        "compressedKB": 22.9
+      },
+      {
+        "name": "@tanstack/query-core",
+        "KB": 35,
+        "compressedKB": 13.4
+      },
+      {
+        "name": "other",
+        "KB": 20.5,
+        "compressedKB": 9.4
+      },
+      {
+        "name": "src/components/StockDetail",
+        "KB": 19.3,
+        "compressedKB": 6.1
+      },
+      {
+        "name": "src/components/ui",
+        "KB": 18.7,
+        "compressedKB": 8
+      },
+      {
+        "name": "src/components/Chart",
+        "KB": 17.9,
+        "compressedKB": 6.7
+      },
+      {
+        "name": "src/components/Layout",
+        "KB": 16.3,
+        "compressedKB": 7.3
+      },
+      {
+        "name": "src/components/CommandPalette",
+        "KB": 12.2,
+        "compressedKB": 4.7
+      }
+    ]
+  }
+}

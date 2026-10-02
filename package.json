@@ -25,7 +25,8 @@
     "perf:measure": "node scripts/measure-runtime.mjs",
     "perf:lighthouse": "node scripts/run-lighthouse.mjs",
     "verify": "npm run typecheck && npm run lint && npm run test",
-    "prepare": "husky"
+    "prepare": "husky",
+    "analyze": "next experimental-analyze --output && node scripts/bundle-report.mjs"
   },
   "dependencies": {
     "@tanstack/query-async-storage-persister": "5.104.0",
