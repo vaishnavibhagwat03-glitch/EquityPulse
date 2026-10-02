@@ -4,7 +4,7 @@ Real-time stock intelligence for 5,247 simulated NSE/BSE securities: a screener 
 
 > **All market data is simulated.** Prices, fundamentals and indices are generated deterministically for each trading day and move under a live price simulator. Nothing here is investment advice.
 
-**Live demo:** _add the Vercel URL here after deploying_
+**Live demo:** https://equity-pulse-4l8xy1jtm-vaishnavibhagwat03-6142.vercel.app/
 
 ## Quick start
 
