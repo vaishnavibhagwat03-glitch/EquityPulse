@@ -19,7 +19,7 @@ export function GridSkeleton({ rows = 18 }: { rows?: number }) {
         ))}
       </div>
       {Array.from({ length: rows }, (_, r) => (
-        <div key={r} className="flex h-[34px] items-center border-b border-line-subtle">
+        <div key={r} className="flex h-[36px] items-center border-b border-line-subtle">
           {WIDTHS.map((w, i) => (
             <div
               key={i}

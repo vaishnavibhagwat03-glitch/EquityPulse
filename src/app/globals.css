@@ -73,7 +73,7 @@
 
   --nav-height: 48px;
   --status-height: 26px;
-  --row-height: 34px;
+  --row-height: 36px;
 }
 
 :root[data-theme='dark'] {

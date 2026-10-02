@@ -47,7 +47,7 @@ import { COLUMNS, DEFAULT_VISIBILITY } from './columns';
  *   quote changed (see cells.tsx), never the row or the grid.
  */
 
-export const ROW_HEIGHT = 34;
+export const ROW_HEIGHT = 36;
 const HEADER_HEIGHT = 34;
 /**
  * Rows kept beyond the viewport on each side. Scrolling is threaded: the
