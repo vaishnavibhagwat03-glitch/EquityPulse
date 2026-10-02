@@ -15,6 +15,8 @@ Every number below was measured; none is estimated. Raw results are in `reports/
 
 Headless Chrome renders without a physical display; scroll figures describe frames Chrome produced and presented, read from its own tracing.
 
+**Which build each table measured.** The desktop targets and engine benchmarks below were measured on charger power with the build before the final round of fixes (compression, CSS layout, CSS return intro, accessibility); those fixes did not change the filter, sort, grid-rendering or feed code paths. The boot-sequence return visit, mobile and Lighthouse-category results were measured after the fixes, on battery power.
+
 ## Targets (desktop — the primary platform per the brief)
 
 | Target                                    | Result                                                                                                                                                                                                                                                   | How measured                                                     |     |
