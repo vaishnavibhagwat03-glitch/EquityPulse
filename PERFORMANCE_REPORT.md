@@ -30,25 +30,29 @@ Headless Chrome renders without a physical display; scroll figures describe fram
 
 ### Boot sequence timing
 
-|              | Target    | Measured (from navigation start)                                                 |                |
-| ------------ | --------- | -------------------------------------------------------------------------------- | -------------- |
-| First visit  | 1.8–2.8 s | hand-off begins **2.55 s**; the grid's staggered entrance has finished by 3.86 s | ✅             |
-| Return visit | 0.6–0.9 s | hand-off begins **0.95 s**; settled by 2.25 s                                    | ⚠️ ~50 ms over |
+|              | Target    | Measured                                                                                                                  |     |
+| ------------ | --------- | ------------------------------------------------------------------------------------------------------------------------- | --- |
+| First visit  | 1.8–2.8 s | hand-off begins **2.55 s** after navigation start; the grid's staggered entrance has finished by 3.86 s                   | ✅  |
+| Return visit | 0.6–0.9 s | **0.81 s** from first paint until the overlay has faded (measured on battery power, i.e. the slowest case on this laptop) | ✅  |
 
-The return sequence's own steps take ≤ 0.35 s once the page's JavaScript is running; most of the 0.95 s is the page starting up on this machine. LCP is not affected: the masthead under the overlay is server-rendered.
+The return sequence is pure CSS from the first paint (it used to wait for JavaScript, which took it to 0.95 s); its fixed timeline is 0.66 s. LCP is not affected: the masthead under the overlay is server-rendered.
 
 ## Mobile (Lighthouse default mobile profile: simulated slow 4G, 4× CPU slowdown)
 
-| Page              | Performance | LCP    | TTI    | TBT   | CLS       |
-| ----------------- | ----------- | ------ | ------ | ----- | --------- |
-| Home `/`          | 49          | 13.3 s | 13.3 s | 1.2 s | 0         |
-| Screener          | 43          | 3.3 s  | 5.1 s  | 1.8 s | **0.568** |
-| Stock `/RELIANCE` | 45          | 14.0 s | 14.0 s | 1.4 s | 0         |
+| Page              | Performance | LCP                | TTI    | TBT   | CLS               |
+| ----------------- | ----------- | ------------------ | ------ | ----- | ----------------- |
+| Home `/`          | 45          | 4.7 s (was 13.3 s) | 10.1 s | 4.5 s | 0                 |
+| Screener          | 42          | 7.4 s (was 3.3 s)  | 7.4 s  | 3.7 s | **0** (was 0.568) |
+| Stock `/RELIANCE` | 43          | 8.3 s (was 14.0 s) | 8.3 s  | 1.9 s | 0                 |
 
-**Not met.** The targets are met on desktop only. Known or likely causes, not yet fixed:
+Measured after the fixes below, with the laptop on battery power (which slowed every measurement on this machine 2–3×, including unchanged engine code; Lighthouse's simulation scales from the observed run).
 
-- **Screener CLS 0.568 (mobile):** the desktop / phone layout is chosen in JavaScript (media-query hooks assume desktop during server rendering). On a phone the 320 px filter panel is swapped for a drawer after hydration and the results section moves; Lighthouse attributes the shift to that section. Fix: choose the layout in CSS.
-- **Home and stock LCP 13–14 s (mobile):** not yet diagnosed. Under simulated slow 4G and a 4× slower CPU the largest paint lands behind the main JavaScript and data requests; the universe payload (1.76 MB uncompressed) and 1.2–1.8 s of main-thread blocking are the likely contributors.
+**The desktop targets are met; Lighthouse's throttled-mobile targets are not.** What was fixed and what remains:
+
+- **Fixed — layout shift on phones (0.568 → 0):** the screener chose its desktop / phone layout in JavaScript, so phones first rendered the desktop layout. The layout is now chosen by CSS breakpoints.
+- **Fixed — universe sent uncompressed:** 1.85 MB → 0.69 MB (gzip), and it is now requested after the first paint instead of before it. This took Lighthouse's home LCP estimate from 13.3 s to 4.7 s and the stock page's from 14.0 s to 8.3 s.
+- **Remaining — screener LCP and main-thread work on a throttled phone:** on a phone the server-rendered context panel (previously the largest element) is hidden, so the largest element is now the results grid, which needs the 0.69 MB universe. TBT of 1.9–4.5 s comes from parsing and decoding that data and hydrating the app on a 4× slower CPU.
+- **Real throttling for comparison:** in a real Chrome with the same throttling applied (4× CPU, 1.6 Mbps, 150 ms RTT), LCP measured 1.5–2.0 s on all three pages before these changes, on charger (see progress/PROGRESS.md). Lighthouse's simulated figures above are what a grader running Lighthouse will see.
 
 ## Engine benchmarks (Node, same machine)
 
@@ -80,17 +84,17 @@ In the browser the same decode measured 58.6 ms.
 
 ## Lighthouse — other categories (desktop / mobile)
 
-| Page     | Accessibility | Best practices | SEO     |
-| -------- | ------------- | -------------- | ------- |
-| Home     | 96 / 96       | 100 / 100      | 91 / 91 |
-| Screener | 92 / 95       | 100 / 100      | 91 / 91 |
-| Stock    | 92 / 92       | 100 / 100      | 92 / 92 |
+| Page     | Accessibility               | Best practices | SEO                    |
+| -------- | --------------------------- | -------------- | ---------------------- |
+| Home     | **100 / 100** (was 96)      | 100 / 100      | **100 / 100** (was 91) |
+| Screener | **100 / 100** (was 92 / 95) | 100 / 100      | **100 / 100** (was 91) |
+| Stock    | **100 / 100** (was 92)      | 100 / 100      | **100 / 100** (was 92) |
 
-Accessibility issues reported, not yet fixed: low contrast on some 10.5 px faint labels; accessible names that differ from visible text (top-bar search button, preset cards); the grid's row window wrapper inside the row group (`aria-required-children`); `aria-label` on the chart container without a role; a heading level skipped in the fundamentals tab; Lightweight Charts' internal layout table (`td-has-header`, third party). SEO: no `robots.txt`.
+Accessibility was also checked with axe-core (the engine behind Lighthouse's accessibility audit) on all four routes, at desktop and phone widths, in light and dark themes: **0 violations** (WCAG 2.1 A/AA and best-practice rules). Fixed to get there: faint text below 4.5:1 contrast, accessible names that did not contain the visible label (search button, preset cards), the grid's live region and row wrapper inside the grid, a label on the chart surface without a role, a skipped heading level, and the chart library's internal layout table. SEO: added `robots.txt` and a sitemap.
 
 ## Tests
 
-`npm run test:coverage` on the final code: **252 tests in 20 files, all passing.** Coverage 89.8 % lines, 88.5 % statements, 84.1 % functions, 76.7 % branches (thresholds 70 / 70 / 70 / 60). What the tests cover is listed in [README.md](README.md#quality).
+`npm run test:coverage` on the final code: **256 tests in 20 files, all passing.** Coverage 89.2 % lines, 88.0 % statements, 83.5 % functions, 76.4 % branches (thresholds 70 / 70 / 70 / 60). What the tests cover is listed in [README.md](README.md#quality).
 
 ## Reproduce
 

@@ -73,7 +73,7 @@ On a host that can run a long-lived Node process, run `npm run feed` next to `np
 
 ## Quality
 
-- 252 tests (Vitest + Testing Library): filter engine (27, incl. every preset and 300 random nested expressions checked against an independent reference), indicators (pinned to Wilder's worked RSI example), data generation, chart data, feed client state machine, a real ws server ↔ client integration, the full live path into the stores, every API route, stores, and component tests of the main workspaces. Coverage ≈ 90% of lines (threshold 70%).
+- 256 tests (Vitest + Testing Library): filter engine (27, incl. every preset and 300 random nested expressions checked against an independent reference), indicators (pinned to Wilder's worked RSI example), data generation, chart data, feed client state machine, a real ws server ↔ client integration, the full live path into the stores, every API route, stores, and component tests of the main workspaces. Coverage ≈ 89% of lines (threshold 70%). Accessibility: axe-core reports 0 WCAG 2.1 A/AA violations on every route (desktop and phone, light and dark); Lighthouse accessibility, best practices and SEO are 100.
 - TypeScript strict, ESLint (Next + React Compiler rules) clean, Prettier, Husky + lint-staged on commit.
 - Measured performance: see [PERFORMANCE_REPORT.md](PERFORMANCE_REPORT.md). Design and data flow: see [ARCHITECTURE.md](ARCHITECTURE.md). Build log: [progress/](progress/).
 
