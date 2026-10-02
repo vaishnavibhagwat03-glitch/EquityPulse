@@ -43,6 +43,9 @@ describe('heatmap', () => {
     loadUniverse(market(120));
     renderWithProviders(<HeatmapWorkspace />);
     expect(screen.getByRole('heading', { name: 'Heatmap' })).toBeInTheDocument();
+    const legend = screen.getByRole('group', { name: 'Colour scale' });
+    expect(legend).toHaveTextContent('≤ −3%');
+    expect(legend).toHaveTextContent('≥ +3%');
     const links = await screen.findAllByRole('link');
     expect(links.length).toBeGreaterThan(5);
     expect(links[0]!.getAttribute('href')).toMatch(/^\/[A-Z0-9%&-]+/);

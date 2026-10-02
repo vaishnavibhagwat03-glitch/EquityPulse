@@ -61,6 +61,7 @@ export function HeatmapWorkspace() {
           Top {PER_SECTOR} companies per sector by market cap · tile size = market cap · colour =
           day change
         </p>
+        <Legend />
       </header>
 
       {groups.length === 0 ? (
@@ -90,7 +91,7 @@ export function HeatmapWorkspace() {
                         href={`/${encodeURIComponent(stock.symbol)}`}
                         aria-label={`${stock.name} (${stock.symbol}) ${label}`}
                         title={`${stock.name} · ${label}`}
-                        className="flex h-14 flex-col justify-center rounded-sm px-1.5 text-ink transition-[filter] hover:brightness-95"
+                        className="flex h-14 flex-col justify-center rounded-sm px-1.5 text-ink transition-[filter] hover:brightness-95 focus-visible:relative focus-visible:z-10"
                         style={{ background: heatColor(change) }}
                       >
                         <span className="truncate text-[11.5px] font-semibold">{stock.symbol}</span>
@@ -105,5 +106,36 @@ export function HeatmapWorkspace() {
         </div>
       )}
     </section>
+  );
+}
+
+const LEGEND_STEPS = [-3, -2, -1, 0, 1, 2, 3];
+
+const legendLabel = (step: number): string =>
+  step <= -SATURATE_AT
+    ? `≤ −${SATURATE_AT}%`
+    : step >= SATURATE_AT
+      ? `≥ +${SATURATE_AT}%`
+      : `${step > 0 ? '+' : ''}${step}%`;
+
+/** Colour scale key, so colour is never the only way to read a tile (each tile also shows its %). */
+function Legend() {
+  return (
+    <div
+      className="ml-auto flex items-center gap-1 text-[10.5px] text-muted"
+      role="group"
+      aria-label="Colour scale"
+    >
+      {LEGEND_STEPS.map(step => (
+        <span key={step} className="flex flex-col items-center gap-0.5">
+          <span
+            aria-hidden
+            className="h-2.5 w-7 rounded-[2px] border border-line"
+            style={{ background: heatColor(step) }}
+          />
+          <span className="num">{legendLabel(step)}</span>
+        </span>
+      ))}
+    </div>
   );
 }
